@@ -1,22 +1,38 @@
 import React, { useEffect, useState } from "react";
 
 function Comic() {
+  // for storing comic image link
   var [imageCom, setImg] = useState("");
+
+  // for storing latest comic number reference, which stays constant
   const [latestRef, setLatestRef] = useState("");
+
+  // for storing latest comic number reference, which is manipulated at next and prev fetches
   var [comicRef, setRef] = useState("");
+
+  // Loader value to render loading spinner
   var [loading, setLoading] = useState(false);
+
+  // To render default image
   var [render, setRender] = useState(false);
 
+  // CORS header to fix CORS issue. The actual API is appended to this to get rid
   var corsHeader = "https://the-ultimate-api-challenge.herokuapp.com/";
-  var mains = "https://xkcd.com/";
+
+  // Main API
+  var mains = "phtts://xkcd.com/";
+
+  // API endpoint for latest comic fetch
   var latest = "info.0.json";
   var api = "";
 
+  // Fetches latest comic
   const latestFetch = () => {
     api = corsHeader + mains + latest;
     fetchAPI(api);
   };
 
+  // Fetches previous comic
   const prevFetch = () => {
     var ref = (comicRef - 1).toString();
     setRef(comicRef - 1);
@@ -24,6 +40,7 @@ function Comic() {
     fetchAPI(api);
   };
 
+  // Fetches next comic
   const nextFetch = () => {
     var ref;
     if (comicRef + 1 > latestRef) {
@@ -36,6 +53,7 @@ function Comic() {
     fetchAPI(api);
   };
 
+  // Fetches random comic on the basis of random comic referece generated inside it
   const randomFetch = () => {
     var max = Math.floor(latestRef + 1);
     console.log(max);
@@ -45,6 +63,7 @@ function Comic() {
     fetchAPI(api);
   };
 
+  // Main function to fetch API
   async function fetchAPI(api) {
     const res = await fetch(api);
     console.log("status:", res.ok, res);
@@ -66,6 +85,7 @@ function Comic() {
     }
   }
 
+  // Initially triggered for fetching the latest comic reference
   useEffect(async function fetchAPI() {
     const res = await fetch(
       "https://the-ultimate-api-challenge.herokuapp.com/https://xkcd.com/info.0.json"
