@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col space-y-4 justify-center">
       <Navbar />
       <Comic />
       <Footer />

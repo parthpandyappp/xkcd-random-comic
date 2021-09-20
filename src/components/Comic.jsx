@@ -4,6 +4,9 @@ function Comic() {
   // for storing comic image link
   var [imageCom, setImg] = useState("");
 
+  // for storing comic title
+  var [title, setTitle] = useState("");
+
   // for storing latest comic number reference, which stays constant
   const [latestRef, setLatestRef] = useState("");
 
@@ -20,7 +23,7 @@ function Comic() {
   var corsHeader = "https://the-ultimate-api-challenge.herokuapp.com/";
 
   // Main API
-  var mains = "phtts://xkcd.com/";
+  var mains = "https://xkcd.com/";
 
   // API endpoint for latest comic fetch
   var latest = "info.0.json";
@@ -75,13 +78,13 @@ function Comic() {
       setLoading(true);
       let data = await res.json();
       setImg(data.img);
+      setTitle(data.title);
       setRef(data.num);
 
       setTimeout(() => {
         setLoading(false);
       }, 2000);
       setRender(true);
-      console.log(imageCom);
     }
   }
 
@@ -99,12 +102,16 @@ function Comic() {
       let data = await res.json();
 
       setRef(data.num);
+      setTitle(data.title);
       setLatestRef(data.num);
     }
   }, []);
 
   return (
-    <div className="flex flex-col justify-center">
+    <div
+      style={{ letterSpacing: "0.3rem" }}
+      className="flex flex-col justify-center space-x-3"
+    >
       <div className="flex text-center justify-center items-center space-x-2 mt-2">
         {/* <img src="" > */}
         <button
@@ -127,8 +134,12 @@ function Comic() {
         </button>
       </div>
 
+      <div className="flex justify-center items-center">
+        <h1 class="text-center p-5 font-bold text-2xl underline">{title}</h1>
+      </div>
+
       {loading ? (
-        <div className="flex justify-center items-center mt-10 md:mt-6 p-2">
+        <div className="flex justify-center items-center h-72 mt-10 md:mt-6 p-2">
           <i className="fa fa-cog fa-spin text-4xl" />
         </div>
       ) : (
@@ -138,8 +149,8 @@ function Comic() {
               <img
                 className="shadow-lg"
                 src={imageCom}
-                height="200"
-                width="200"
+                height="350"
+                width="350"
               />
             </div>
           ) : (
@@ -147,6 +158,8 @@ function Comic() {
               <img
                 className="shadow-lg"
                 src="https://imgs.xkcd.com/comics/rover_replies.png"
+                height="350"
+                width="350"
               />
             </div>
           ),
@@ -155,7 +168,7 @@ function Comic() {
 
       <div className="flex text-center justify-center items-center space-x-2 mt-4">
         <button
-          className="bg-gray-600 text-white text-lg font-bold px-6 py-2 rounded hover:shadow-lg"
+          className="bg-gray-600 text-white text-xl font-bold px-8 py-2 rounded hover:shadow-lg"
           onClick={randomFetch}
         >
           Random
