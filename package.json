@@ -1,11 +1,8 @@
 {
-  "name": "react",
+  "name": "xkcd-random-comics",
   "version": "1.0.0",
   "description": "React example starter project",
-  "keywords": [
-    "react",
-    "starter"
-  ],
+  "keywords": [],
   "main": "src/index.js",
   "dependencies": {
     "react": "17.0.2",
