@@ -60,7 +60,7 @@ function Comic() {
   const randomFetch = () => {
     var max = Math.floor(latestRef + 1);
     console.log(max);
-    randomRef = Math.floor(Math.random() * max);
+    var randomRef = Math.floor(Math.random() * max);
     api = corsHeader + mains + randomRef + "/" + latest;
     console.log(api);
     fetchAPI(api);
