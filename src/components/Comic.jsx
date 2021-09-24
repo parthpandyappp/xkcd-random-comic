@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 function Comic() {
   // for storing comic image link
@@ -29,6 +30,18 @@ function Comic() {
   var latest = "info.0.json";
   var api = "";
 
+  const notify = () =>
+    toast.success("Already on the latest Comic.", {
+      style: {
+        border: "1px solid #713200",
+        padding: "16px",
+        color: "#111827",
+        letterSpacing: "0.1rem",
+        background: "#FDE68A",
+      },
+      icon: "😱",
+    });
+
   // Fetches latest comic
   const latestFetch = () => {
     api = corsHeader + mains + latest;
@@ -48,6 +61,7 @@ function Comic() {
     var ref;
     if (comicRef + 1 > latestRef) {
       ref = comicRef.toString();
+      notify();
     } else {
       ref = (comicRef + 1).toString();
       setRef(comicRef + 1);
@@ -108,26 +122,25 @@ function Comic() {
   }, []);
 
   return (
-    <div
-      style={{ letterSpacing: "0.3rem" }}
-      className="flex flex-col justify-center space-x-3"
-    >
+    <div className="flex flex-col justify-center space-x-3 ">
+      <Toaster />
+
       <div className="flex text-center justify-center items-center space-x-2 mt-2">
         {/* <img src="" > */}
         <button
-          className="bg-gray-600 text-white font-bold py-2 px-4 rounded hover:shadow-lg"
+          className="bg-gray-600 text-white font-bold py-2 px-4 rounded hover:shadow-lg tracking-widest"
           onClick={prevFetch}
         >
           Prev
         </button>
         <button
-          className="bg-gray-600 text-white font-bold py-2 px-4 rounded hover:shadow-lg"
+          className="bg-gray-600 text-white font-bold py-2 px-4 rounded hover:shadow-lg tracking-widest"
           onClick={latestFetch}
         >
           Latest
         </button>
         <button
-          className="bg-gray-600 text-white font-bold py-2 px-4 rounded hover:shadow-lg"
+          className="bg-gray-600 text-white font-bold py-2 px-4 rounded hover:shadow-lg tracking-widest"
           onClick={nextFetch}
         >
           Next
@@ -135,7 +148,9 @@ function Comic() {
       </div>
 
       <div className="flex justify-center items-center">
-        <h1 class="text-center p-5 font-bold text-2xl underline">{title}</h1>
+        <h1 class="text-center p-5 font-bold text-2xl underline tracking-widest">
+          {title}
+        </h1>
       </div>
 
       {loading ? (
@@ -168,7 +183,7 @@ function Comic() {
 
       <div className="flex text-center justify-center items-center space-x-2 mt-4">
         <button
-          className="bg-gray-600 text-white text-xl font-bold px-8 py-2 rounded hover:shadow-lg"
+          className="bg-gray-600 text-white text-xl font-bold px-8 py-2 rounded hover:shadow-lg  tracking-widest"
           onClick={randomFetch}
         >
           Random
