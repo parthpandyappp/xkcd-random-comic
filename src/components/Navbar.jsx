@@ -123,8 +123,14 @@ function Navbar() {
         </div>
       </div>
       <div className="block mobile-nav hidden md:hidden text-white bg-gray-800 mt-2 pl-2 text-lg">
-        <span className="block">Github</span>
-        <span className="block">About Me</span>
+        <span className="block">
+          <a href="https://github.com/parthpandyappp/xkcd-random-comic/">
+            Github
+          </a>
+        </span>
+        <span className="block">
+          <a href="https://parthpandyappp.github.io/">About Me</a>
+        </span>
       </div>
     </div>
   );
